@@ -5,9 +5,10 @@ exports.readingListEmpty=()=>{
 
 exports.getBook = () => {
     if (readingList.length == 0) return null
-    return readingList.map(item =>{
-        return  `${item.title} by ${item.author}, ${item.length} pages, ${item.year}, read on ${item.readingDate}, ${item.rating}`;
-    }) 
+    return bookFormat(readingList)
+    // readingList.map(item =>{
+    //     return  `${item.title} by ${item.author}, ${item.length} pages, ${item.year}, read on ${item.readingDate}, ${item.rating}`;
+    // }) 
 }
 
 exports.addBook = (book, readingData) =>{
@@ -20,9 +21,25 @@ exports.numberRead = () =>{
 
 exports.removeBook = (title) =>{
     for(let i in readingList){
-        console.log(readingList[i])
         if(readingList[i].title == title){
             readingList.splice(i,1)
         }
     }
 }
+
+exports.getBookByRating = (rating) =>{
+    let arr = []
+    for(let i in readingList){
+        if(readingList[i].rating == rating){
+            arr.push(readingList[i])
+        }
+    }
+    return bookFormat(arr);
+}
+
+let bookFormat = (arr) =>{
+    return arr.map(item =>{
+        return  `${item.title} by ${item.author}, ${item.length} pages, ${item.year}, read on ${item.readingDate}, ${item.rating}`;
+    })
+}
+
