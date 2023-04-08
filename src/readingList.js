@@ -1,33 +1,28 @@
-// class ReadingList{
-//     static title;
-//     static author;
-//     static length;
-//     static year;
-//     static readingList = [];
-
-//     constructor(title, author, length, year){
-//         this.title = title;
-//         this.author = author;
-//         this.length = length;
-//         this.year = year
-//     }
-
-//     getBook(){
-//         if(this.readingList.length == 0) return null
-//         return this.readingList;
-//     }
-// }
-
-var readingList = []
-let title;
-let author;
-let length;
-let year;
+let readingList = []
+exports.readingListEmpty=()=>{
+    readingList = []
+}
 
 exports.getBook = () => {
     if (readingList.length == 0) return null
-    return readingList;
+    return readingList.map(item =>{
+        return  `${item.title} by ${item.author}, ${item.length} pages, ${item.year}, read on ${item.readingDate}, ${item.rating}`;
+    }) 
 }
 
+exports.addBook = (book, readingData) =>{
+    readingList.push({...book, ...readingData})
+}
 
-// module.exports = ReadingList;
+exports.numberRead = () =>{
+    return readingList.length;
+}
+
+exports.removeBook = (title) =>{
+    for(let i in readingList){
+        console.log(readingList[i])
+        if(readingList[i].title == title){
+            readingList.splice(i,1)
+        }
+    }
+}
